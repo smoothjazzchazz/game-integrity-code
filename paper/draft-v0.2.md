@@ -321,7 +321,7 @@ $$
 
 #### Proof sketch
 
-If X moves in a nonterminal state, then one of three things happens: X wins, the board becomes full without a winner, or the game remains nonterminal and it becomes O’s turn. Likewise, if O moves in a nonterminal state, then either O wins or the game remains nonterminal and it becomes X’s turn. Since O never makes the ninth move, O cannot move directly into a draw. Terminal closure follows immediately from the definition of $\mathcal L$. $\square$
+If X moves in a nonterminal state, then one of three things happens: X wins, the board becomes full without a winner, or the game remains nonterminal and it becomes O’s turn. Likewise, if O moves in a nonterminal state, then either O wins or the game remains nonterminal and it becomes X’s turn. Since O never makes the ninth move, O cannot move directly into a draw. Terminal closure follows immediately from the definition of $\mathcal L$.
 
 ---
 
@@ -331,7 +331,7 @@ Every maximal legal history beginning at $s_0$ reaches exactly one of the termin
 
 #### Proof sketch
 
-The board starts with nine empty cells. Every legal move fills exactly one empty cell, and no move ever removes a mark. So a legal history cannot contain more than nine moves. If play is maximal, it cannot stop before a terminal state, because any nonterminal reachable board still has a legal move available to the player whose turn it is. Therefore maximal play always ends in a terminal state, and because the game ends immediately upon a legal win, exactly one of the three terminal outcomes occurs. $\square$
+The board starts with nine empty cells. Every legal move fills exactly one empty cell, and no move ever removes a mark. So a legal history cannot contain more than nine moves. If play is maximal, it cannot stop before a terminal state, because any nonterminal reachable board still has a legal move available to the player whose turn it is. Therefore maximal play always ends in a terminal state, and because the game ends immediately upon a legal win, exactly one of the three terminal outcomes occurs. 
 
 ---
 
@@ -350,7 +350,7 @@ $$
 
 #### Proof sketch
 
-Induct on the length of a legal history from $s_0$ to $s$. The base case is the initial state. The induction step follows from closure of the invariant under legal transitions. $\square$
+Induct on the length of a legal history from $s_0$ to $s$. The base case is the initial state. The induction step follows from closure of the invariant under legal transitions.
 
 This proposition is simple, but it is important because it gives me a clear first target for Lean 4.
 
