@@ -57,40 +57,40 @@ The reason for starting this small is not because those issues are unimportant. 
 
 I define a game as a tuple
 
-\[
+$$
 \mathcal G = (P,S,A,s_0,\mathcal L,\delta,T,u)
-\]
+$$
 
 where:
 
-- \(P\) is a finite nonempty set of players,
-- \(S\) is the set of **representable** states,
-- \(A\) is the set of representable actions,
-- \(s_0 \in S\) is the initial state,
-- \(\mathcal L \subseteq S \times P \times A\) is the admissibility relation,
-- \(\delta : S \times P \times A \rightharpoonup S\) is a **partially defined** transition function,
-- \(T \subseteq S\) is the set of terminal states,
-- \(u : T \to \mathbb R^{|P|}\) is a terminal payoff function.
+- $P$ is a finite nonempty set of players,
+- $S$ is the set of **representable** states,
+- $A$ is the set of representable actions,
+- $s_0 \in S$ is the initial state,
+- $\mathcal L \subseteq S \times P \times A$ is the admissibility relation,
+- $\delta : S \times P \times A \rightharpoonup S$ is a **partially defined** transition function,
+- $T \subseteq S$ is the set of terminal states,
+- $u : T \to \mathbb R^{|P|}$ is a terminal payoff function.
 
 This is not meant to be a universal definition of all games. It is the starting class of games I want to study in this project.
 
 The most important feature here is that the transition function is **partial**. Not every state-player-action triple is valid. In fact,
 
-\[
+$$
 \operatorname{dom}(\delta)=\mathcal L.
-\]
+$$
 
-So if \((s,p,a)\notin \mathcal L\), then \(\delta(s,p,a)\) is undefined. In this model, an illegal action does not transition to an “error state.” It simply does not correspond to a game transition at all.
+So if $(s,p,a)\notin \mathcal L$, then $\delta(s,p,a)$ is undefined. In this model, an illegal action does not transition to an “error state.” It simply does not correspond to a game transition at all.
 
 ---
 
 ### Definition 2. Admissible actions
 
-Given a state \(s\in S\) and player \(p\in P\), define the set of admissible actions for that player at that state by
+Given a state $s\in S$ and player $p\in P$, define the set of admissible actions for that player at that state by
 
-\[
+$$
 A_p(s)=\{a\in A \mid (s,p,a)\in \mathcal L\}.
-\]
+$$
 
 This makes action availability explicitly state-dependent.
 
@@ -102,26 +102,26 @@ That matters because it captures one of the main ideas behind this paper: the se
 
 A **legal history** is a sequence
 
-\[
+$$
 h=(s_0,p_0,a_0,s_1,\dots,p_{n-1},a_{n-1},s_n)
-\]
+$$
 
-such that for every \(0\leq i<n\),
+such that for every $0\leq i\lt n$,
 
-\[
+$$
 (s_i,p_i,a_i)\in \mathcal L
 \quad\text{and}\quad
 s_{i+1}=\delta(s_i,p_i,a_i).
-\]
+$$
 
-Let \(H_{\mathcal G}\) be the set of all such legal histories beginning at \(s_0\).
+Let $H_{\mathcal G}$ be the set of all such legal histories beginning at $s_0$.
 
-A state is **reachable** if it occurs as the final state of some legal history. The set of reachable states is denoted by \(R\subseteq S\).
+A state is **reachable** if it occurs as the final state of some legal history. The set of reachable states is denoted by $R\subseteq S$.
 
-This distinction between \(S\) and \(R\) is central:
+This distinction between $S$ and $R$ is central:
 
-- \(S\) contains all states that can be represented,
-- \(R\) contains only states that can actually arise through legal play.
+- $S$ contains all states that can be represented,
+- $R$ contains only states that can actually arise through legal play.
 
 That is already important for the broader research direction. A machine may be able to store a state in memory even if that state has no legal justification inside the game.
 
@@ -135,84 +135,84 @@ Tic-Tac-Toe is a good starting point because it is small enough to formalize cle
 
 Let
 
-\[
+$$
 P=\{X,O\}, \qquad C=\{1,2,\dots,9\}, \qquad V=\{\varnothing,X,O\}.
-\]
+$$
 
 A board is a function
 
-\[
+$$
 b:C\to V.
-\]
+$$
 
 A game state is a pair
 
-\[
+$$
 s=(b,t)\in S=V^C\times P,
-\]
+$$
 
-where \(b\) is the board and \(t\) is the player whose turn it is to move.
+where $b$ is the board and $t$ is the player whose turn it is to move.
 
 The initial state is
 
-\[
+$$
 s_0=(b_0,X)
-\]
+$$
 
-where \(b_0(c)=\varnothing\) for every cell \(c\in C\).
+where $b_0(c)=\varnothing$ for every cell $c\in C$.
 
 ---
 
 ### 4.2 Terminal states
 
-Let \(\mathcal W\) be the set of eight winning lines in Tic-Tac-Toe:
+Let $\mathcal W$ be the set of eight winning lines in Tic-Tac-Toe:
 
-\[
+$$
 \mathcal W=
 \{\{1,2,3\},\{4,5,6\},\{7,8,9\},\{1,4,7\},\{2,5,8\},\{3,6,9\},\{1,5,9\},\{3,5,7\}\}.
-\]
+$$
 
 Define
 
-\[
+$$
 \operatorname{Win}_p(b)
 \iff
 \exists w\in\mathcal W\;\forall c\in w,\; b(c)=p.
-\]
+$$
 
 Also define
 
-\[
+$$
 \operatorname{Full}(b)
 \iff
 \forall c\in C,\; b(c)\neq\varnothing.
-\]
+$$
 
 Then the terminal states are
 
-\[
+$$
 T=\{(b,t)\in S\mid \operatorname{Win}_X(b)\lor \operatorname{Win}_O(b)\lor \operatorname{Full}(b)\}.
-\]
+$$
 
 ---
 
 ### 4.3 Admissibility and transition function
 
-An action is just a selected cell, so \(A=C\).
+An action is just a selected cell, so $A=C$.
 
 A move is admissible exactly when it is that player’s turn, the chosen cell is empty, and the current state is not already terminal:
 
-\[
+$$
 ((b,t),p,a)\in \mathcal L
 \iff
 t=p \;\land\; b(a)=\varnothing \;\land\; (b,t)\notin T.
-\]
+$$
 
 If a move is legal, then the transition function updates the board and switches the turn:
 
-\[
+$$
 \delta((b,t),p,a)=(b[a\mapsto p],\operatorname{opp}(t)).
-\]
+$$
 
 If the move is not admissible, then the transition is undefined.
 
@@ -224,44 +224,70 @@ This is exactly the kind of partiality I want to capture. The model does not ask
 
 To keep the state machine readable, I do not draw every concrete board configuration. Instead I group reachable states into five classes:
 
-\[
+$$
 N_X = \{(b,X)\in R\mid (b,X)\notin T\}
-\]
+$$
 
-\[
+$$
 N_O = \{(b,O)\in R\mid (b,O)\notin T\}
-\]
+$$
 
-\[
+$$
 T_X = \{(b,t)\in R\mid \operatorname{Win}_X(b)\}
-\]
+$$
 
-\[
+$$
 T_O = \{(b,t)\in R\mid \operatorname{Win}_O(b)\}
-\]
+$$
 
-\[
+$$
 T_D = \{(b,t)\in R\mid \operatorname{Full}(b) \land \neg\operatorname{Win}_X(b) \land \neg\operatorname{Win}_O(b)\}.
-\]
+$$
 
 These classes partition the reachable state space:
 
-\[
+$$
 R = N_X\; \dot\cup\; N_O\; \dot\cup\; T_X\; \dot\cup\; T_O\; \dot\cup\; T_D.
-\]
+$$
 
 ### Figure 1. Abstract FSM for Tic-Tac-Toe termination structure
 
-![Abstract FSM for Tic-Tac-Toe](assets/tictactoe-fsm.png)
+```mermaid
+flowchart TD
+    s0["s₀ = (b₀, X)<br/>initial empty board"]
+    Linit["initially, s₀ ∈ N_X"]
+    NX["N_X<br/>reachable nonterminal states<br/>with X to move"]
+    LXNO["∃ a ∈ A_X(s):<br/>δ(s,X,a) ∈ N_O"]
+    NO["N_O<br/>reachable nonterminal states<br/>with O to move"]
+    LONX["∃ a ∈ A_O(s):<br/>δ(s,O,a) ∈ N_X"]
+    LXTX["∃ a ∈ A_X(s):<br/>δ(s,X,a) ∈ T_X"]
+    LOTO["∃ a ∈ A_O(s):<br/>δ(s,O,a) ∈ T_O"]
+    LOTD["∃ a ∈ A_O(s):<br/>δ(s,O,a) ∈ T_D"]
+    TX["T_X<br/>terminal states<br/>X wins"]
+    TO["T_O<br/>terminal states<br/>O wins"]
+    Tdraw["T_D<br/>terminal states<br/>draw"]
+
+    s0 --> Linit --> NX
+    NX --> LXNO --> NO
+    NO --> LONX --> NX
+    NX --> LXTX --> TX
+    NO --> LOTO --> TO
+    NO --> LOTD --> Tdraw
+
+    classDef state fill:#143a5c,stroke:#7eb6e0,color:#fff
+    classDef note fill:#0e2a44,stroke:#5aa0d6,color:#fff
+    class s0,NX,NO,TX,TO,Tdraw state
+    class Linit,LXNO,LONX,LXTX,LOTO,LOTD note
+```
 
 This diagram is not the full state graph of Tic-Tac-Toe. It is an **abstracted finite state machine over classes of reachable states**.
 
 The arrows should be read as **there exists at least one legal concrete transition of that type**. For example,
 
-- from \(N_X\), X may move to another nonterminal state in \(N_O\),
-- from \(N_X\), X may also move into \(T_X\) by completing a winning line,
-- from \(N_X\), X may move into \(T_D\) by making the final non-winning move,
-- from \(N_O\), O may move to \(N_X\) or \(T_O\).
+- from $N_X$, X may move to another nonterminal state in $N_O$,
+- from $N_X$, X may also move into $T_X$ by completing a winning line,
+- from $N_X$, X may move into $T_D$ by making the final non-winning move,
+- from $N_O$, O may move to $N_X$ or $T_O$.
 
 A useful detail here is that **O cannot move directly to a draw state**. Since X moves first, the ninth and final move belongs to X. So a draw can only happen immediately after X’s move.
 
@@ -275,56 +301,56 @@ At this point, I am not trying to prove anything deep yet. I just want the frame
 
 For any admissible move in a reachable state,
 
-\[
+$$
 s\in N_X \implies \delta(s,X,a)\in N_O\cup T_X\cup T_D,
-\]
+$$
 
 and
 
-\[
+$$
 s\in N_O \implies \delta(s,O,a)\in N_X\cup T_O.
-\]
+$$
 
 Also,
 
-\[
+$$
 s\in T_X\cup T_O\cup T_D
 \implies
 \forall p\in P,\forall a\in A,\; \delta(s,p,a)\text{ is undefined}.
-\]
+$$
 
 #### Proof sketch
 
-If X moves in a nonterminal state, then one of three things happens: X wins, the board becomes full without a winner, or the game remains nonterminal and it becomes O’s turn. Likewise, if O moves in a nonterminal state, then either O wins or the game remains nonterminal and it becomes X’s turn. Since O never makes the ninth move, O cannot move directly into a draw. Terminal closure follows immediately from the definition of \(\mathcal L\). \(\square\)
+If X moves in a nonterminal state, then one of three things happens: X wins, the board becomes full without a winner, or the game remains nonterminal and it becomes O’s turn. Likewise, if O moves in a nonterminal state, then either O wins or the game remains nonterminal and it becomes X’s turn. Since O never makes the ninth move, O cannot move directly into a draw. Terminal closure follows immediately from the definition of $\mathcal L$. $\square$
 
 ---
 
 ### Proposition 2. Finite termination of maximal play
 
-Every maximal legal history beginning at \(s_0\) reaches exactly one of the terminal classes \(T_X\), \(T_O\), or \(T_D\) in at most nine moves.
+Every maximal legal history beginning at $s_0$ reaches exactly one of the terminal classes $T_X$, $T_O$, or $T_D$ in at most nine moves.
 
 #### Proof sketch
 
-The board starts with nine empty cells. Every legal move fills exactly one empty cell, and no move ever removes a mark. So a legal history cannot contain more than nine moves. If play is maximal, it cannot stop before a terminal state, because any nonterminal reachable board still has a legal move available to the player whose turn it is. Therefore maximal play always ends in a terminal state, and because the game ends immediately upon a legal win, exactly one of the three terminal outcomes occurs. \(\square\)
+The board starts with nine empty cells. Every legal move fills exactly one empty cell, and no move ever removes a mark. So a legal history cannot contain more than nine moves. If play is maximal, it cannot stop before a terminal state, because any nonterminal reachable board still has a legal move available to the player whose turn it is. Therefore maximal play always ends in a terminal state, and because the game ends immediately upon a legal win, exactly one of the three terminal outcomes occurs. $\square$
 
 ---
 
 ### Proposition 3. Reachability invariant schema
 
-Let \(I:S\to \mathsf{Prop}\) be an invariant such that:
+Let $I:S\to \mathsf{Prop}$ be an invariant such that:
 
-1. \(I(s_0)\) holds, and
-2. whenever \((s,p,a)\in \mathcal L\), if \(I(s)\) holds then \(I(\delta(s,p,a))\) also holds.
+1. $I(s_0)$ holds, and
+2. whenever $(s,p,a)\in \mathcal L$, if $I(s)$ holds then $I(\delta(s,p,a))$ also holds.
 
 Then
 
-\[
+$$
 \forall s\in R,\; I(s).
-\]
+$$
 
 #### Proof sketch
 
-Induct on the length of a legal history from \(s_0\) to \(s\). The base case is the initial state. The induction step follows from closure of the invariant under legal transitions. \(\square\)
+Induct on the length of a legal history from $s_0$ to $s$. The base case is the initial state. The induction step follows from closure of the invariant under legal transitions. $\square$
 
 This proposition is simple, but it is important because it gives me a clear first target for Lean 4.
 
@@ -352,11 +378,11 @@ That stronger claim will require more than these definitions. It will need:
 
 A target statement for the future might look like
 
-\[
+$$
 \operatorname{CommittedHistories}(\Pi,\mathcal A)\subseteq H_{\mathcal G},
-\]
+$$
 
-for some protocol \(\Pi\) and adversary class \(\mathcal A\).
+for some protocol $\Pi$ and adversary class $\mathcal A$.
 
 But at this point that is still a **research target**, not a theorem.
 
