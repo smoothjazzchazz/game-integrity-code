@@ -6,11 +6,11 @@ This repository investigates the separation between a game's **legal state trans
 
 ## Research status
 
-Exploratory (v0.1). The current work defines finite deterministic games using a state-dependent admissibility relation and a partial transition function, and develops Tic-Tac-Toe as a first case study. **No end-to-end security theorem is yet claimed.**
+Exploratory (v0.2). The current work defines finite deterministic games using a state-dependent admissibility relation and a partial transition function, and develops Tic-Tac-Toe as a first case study. **No end-to-end security theorem is yet claimed.**
 
 ## Start here
 
-- [Initial paper draft](paper/draft-v0.1.md)
+- [Initial paper draft](paper/draft-v0.2.md)
 - [Lean formalization notes](formalization/README.md)
 - [Worked examples](examples/README.md)
 - [Reading and references](references/README.md)
