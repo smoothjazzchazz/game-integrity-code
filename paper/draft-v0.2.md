@@ -77,7 +77,7 @@ This is not meant to be a universal definition of all games. It is the starting 
 The most important feature here is that the transition function is **partial**. Not every state-player-action triple is valid. In fact,
 
 $$
-\operatorname{dom}(\delta)=\mathcal L.
+\mathrm{dom}(\delta)=\mathcal L.
 $$
 
 So if $(s,p,a)\notin \mathcal L$, then $\delta(s,p,a)$ is undefined. In this model, an illegal action does not transition to an “error state.” It simply does not correspond to a game transition at all.
@@ -175,7 +175,7 @@ $$
 Define
 
 $$
-\operatorname{Win}_p(b)
+\mathrm{Win}_p(b)
 \iff
 \exists w\in\mathcal W\;\forall c\in w,\; b(c)=p.
 $$
@@ -183,7 +183,7 @@ $$
 Also define
 
 $$
-\operatorname{Full}(b)
+\mathrm{Full}(b)
 \iff
 \forall c\in C,\; b(c)\neq\varnothing.
 $$
@@ -191,7 +191,7 @@ $$
 Then the terminal states are
 
 $$
-T=\{(b,t)\in S\mid \operatorname{Win}_X(b)\lor \operatorname{Win}_O(b)\lor \operatorname{Full}(b)\}.
+T=\{(b,t)\in S\mid \mathrm{Win}_X(b)\lor \mathrm{Win}_O(b)\lor \mathrm{Full}(b)\}.
 $$
 
 ---
@@ -211,7 +211,7 @@ $$
 If a move is legal, then the transition function updates the board and switches the turn:
 
 $$
-\delta((b,t),p,a)=(b[a\mapsto p],\operatorname{opp}(t)).
+\delta((b,t),p,a)=(b[a\mapsto p],\mathrm{opp}(t)).
 $$
 
 If the move is not admissible, then the transition is undefined.
@@ -233,15 +233,15 @@ N_O = \{(b,O)\in R\mid (b,O)\notin T\}
 $$
 
 $$
-T_X = \{(b,t)\in R\mid \operatorname{Win}_X(b)\}
+T_X = \{(b,t)\in R\mid \mathrm{Win}_X(b)\}
 $$
 
 $$
-T_O = \{(b,t)\in R\mid \operatorname{Win}_O(b)\}
+T_O = \{(b,t)\in R\mid \mathrm{Win}_O(b)\}
 $$
 
 $$
-T_D = \{(b,t)\in R\mid \operatorname{Full}(b) \land \neg\operatorname{Win}_X(b) \land \neg\operatorname{Win}_O(b)\}.
+T_D = \{(b,t)\in R\mid \mathrm{Full}(b) \land \neg\mathrm{Win}_X(b) \land \neg\mathrm{Win}_O(b)\}.
 $$
 
 These classes partition the reachable state space:
@@ -379,7 +379,7 @@ That stronger claim will require more than these definitions. It will need:
 A target statement for the future might look like
 
 $$
-\operatorname{CommittedHistories}(\Pi,\mathcal A)\subseteq H_{\mathcal G},
+\mathrm{CommittedHistories}(\Pi,\mathcal A)\subseteq H_{\mathcal G},
 $$
 
 for some protocol $\Pi$ and adversary class $\mathcal A$.
